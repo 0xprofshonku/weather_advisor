@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather Advisor</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; background: #f4f4f9; }
+        select, button { padding: 10px; font-size: 16px; margin: 5px; }
+        #result { margin-top: 20px; font-weight: bold; font-size: 20px; color: #333; }
+    </style>
+</head>
+<body>
+    <h1>👕 Node.js Weather Advisor</h1>
+    <p>Select the current weather outside:</p>
+    
+    <select id="weatherInput">
+        <option value="sunny">Sunny</option>
+        <option value="rainy">Rainy</option>
+        <option value="snowy">Snowy</option>
+        <option value="cloudy">Cloudy</option>
+    </select>
+    <button onclick="getAdvice()">Get Advice</button>
+
+    <div id="result"></div>
+
+    <script>
+        async function getAdvice() {
+            const weather = document.getElementById('weatherInput').value;
+            
+            // Fetch data from our Node.js backend API
+            const response = await fetch(`/advisor?weather=${weather}`);
+            const data = await response.json();
+            
+            // Display the message on the screen
+            document.getElementById('result').innerText = data.message;
+        }
+    </script>
+</body>
+</html>
